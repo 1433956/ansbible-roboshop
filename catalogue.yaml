@@ -36,7 +36,15 @@
   - name: Install dependencies  for nodejs
     community.general.npm:
       path: /app
-      state: present
+  - name: copy catalogue service 
+    ansible.builtin.copy:
+      src: catalogue.service
+      dest: /etc/systemd/system/catalogue.service
+
+  - name: daemon reload catalogue service
+    ansible.builtin.systemd_service:
+      daemon_reload: true
+  
 
   
       
