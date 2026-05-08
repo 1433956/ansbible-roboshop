@@ -49,8 +49,27 @@
       name: catalogue
       state: started
       enabled: yes
+  - name: copy mongo repo 
+    ansible.builtin.copy:
+      src: mongo.repo
+      dest: /etc/yum.repos.d/mongo.repo
 
+  - name: install mongodb client 
+    ansible.builtin.dnf:
+      name: mongodb-mongosh
+      state: present
+  - name: load data into mongodb  
+    ansible.builtin.command: mongosh --host mongodb.devops26.sbs --eval 'db.getMongo().getDBNames().indexOf("catalogue")'
+    register: shell_ouput
+  - name: print shell shell_ouput
+    ansible.builtin.debug:
+      msg: "{{ shell_ouput }}"
   
+  - name: load test data 
+    ansible.builtin.shell: mongosh --host mongodb.daws84s.site < /app/db/master-data.js
+    when: shell_ouput < 0
+       
+
       
   
     
