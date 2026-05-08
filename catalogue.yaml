@@ -27,8 +27,16 @@
     ansible.builtin.get_url:
       url: https://roboshop-artifacts.s3.amazonaws.com/catalogue-v3.zip  
       dest: /tmp/catalogue.zip
-
-  
+# remote_src=yes to unpack an archive which already exists on the target.
+  - name: unzip the application code 
+    ansible.builtin.unarchive:
+      src: /tmp/catalogue.zip
+      dest: /app
+      remote_src: yes
+  - name: Install dependencies  for nodejs
+    community.general.npm:
+      path: /app
+      state: present
 
   
       
