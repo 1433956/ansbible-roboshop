@@ -23,11 +23,16 @@
       state: directory
 
   - name: download application code for user
-    tags:
-    - import
     ansible.builtin.get_url:
       url: https://roboshop-artifacts.s3.amazonaws.com/user-v3.zip
       dest: /tmp/user.zip
+  
+  - name: unzip application code for user
+    tags:
+    - import
+    ansible.builtin.unarchive:
+      path: /tmp/user.zip
+      dest: /app
 
 
       
