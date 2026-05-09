@@ -15,6 +15,6 @@
       name: roboshop
       shell: /sbin/nologin
       home: /app
-      type: system
+      type: system # system user creation
 
       
