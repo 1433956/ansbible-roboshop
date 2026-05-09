@@ -13,3 +13,9 @@
       home: /app
       system: true
 
+  - name: create app directory
+    tags:
+    - import
+    ansible.builtin.file:
+      name: /app
+      type: directory
