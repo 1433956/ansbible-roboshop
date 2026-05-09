@@ -11,10 +11,12 @@
       name: nodejs
       state: present
   - name: crete system user 
+    tags:
+    - import
     ansible.builtin.user:
       name: roboshop
       shell: /sbin/nologin
       home: /app
-      type: system # system user creation
+      system: true # system user creation
 
       
