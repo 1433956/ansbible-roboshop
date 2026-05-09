@@ -22,6 +22,6 @@
     - import
     ansible.builtin.file:
       path: /app
-      type: directory
+      state: directory
 
       
