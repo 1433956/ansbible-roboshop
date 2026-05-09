@@ -7,8 +7,8 @@
       name: "{{ item }}"
       state: present
     loop:
-      maven
-      mysql
+    - maven
+    - mysql
   - name: create system user 
     ansible.builtin.user:
       name: roboshop
