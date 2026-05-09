@@ -14,8 +14,18 @@
       system: true
 
   - name: create app directory
-    tags:
-    - import
     ansible.builtin.file:
       name: /app
       state: directory
+
+  - name: download code for shipping
+    ansible.builtin.get_url:
+      url: https://roboshop-artifacts.s3.amazonaws.com/shipping-v3.zip 
+      dest: /tmp/shipping.zip
+  - name: unzip the shipping code 
+    ansible.builtin.unarchive:
+      src: /tmp/shipping.zip
+      dest: /app
+      remote_src: true
+  
+      
