@@ -18,10 +18,16 @@
       system: true # system user creation
 
   - name: create /app directory
-    tags:
-    - import
     ansible.builtin.file:
       path: /app
       state: directory
+
+  - name: download application code for user
+    tags:
+    - import
+    ansible.builtin.get_url:
+      url: https://roboshop-artifacts.s3.amazonaws.com/user-v3.zip
+      dest: /tmp/user.zip
+
 
       
