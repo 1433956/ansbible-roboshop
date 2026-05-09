@@ -34,11 +34,31 @@
       remote_src: true
   
   - name: install nodejs dependencies
-    tags:
-    - import
     community.general.npm:
       path: /app
-    
+  
+  - name: copy user service file
+    tags:
+    - import
+    ansible.builtin.copy:
+    src: user.service
+    dest: /etc/systemd/system/user.service
+  - name: daemon_reload service
+    ansible.builtin.service:
+
+  - name: daemon_reload user service
+    tags:
+    - import
+    ansible.builtin.systemd:
+      daemon_reload: true
+
+  - name: enable and start user service
+    tags:
+    - import
+    ansible.builtin.service:
+      name: user
+      state: started
+      enabled: yes
 
 
       
