@@ -1,0 +1,15 @@
+- name: configure shipping 
+  hosts: shipping
+  become: yes
+  tasks:
+  - name: install maven
+    ansible.builtin.dnf:
+      name: maven
+      state: present
+  - name: create system user 
+    ansible.builtin.user:
+      name: roboshop
+      shell: /sbin/nologin
+      home: /app
+      system: true
+
