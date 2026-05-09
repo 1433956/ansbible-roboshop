@@ -10,4 +10,11 @@
     ansible.builtin.dnf:
       name: nodejs
       state: present
-  
+  - name: crete system user 
+    ansible.builtin.user:
+      name: roboshop
+      shell: /sbin/nologin
+      home: /app
+      type: system
+
+      
