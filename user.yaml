@@ -28,12 +28,15 @@
       dest: /tmp/user.zip
   
   - name: unzip application code for user
-    tags:
-    - import
     ansible.builtin.unarchive:
       src: /tmp/user.zip
       dest: /app
       remote_src: true
+  
+  - name: install nodejs dependencies
+    community.general.npm:
+      path: /app
+    
 
 
       
