@@ -38,8 +38,6 @@
       path: /app
   
   - name: copy user service file
-    tags:
-    - import
     ansible.builtin.copy:
     src: user.service
     dest: /etc/systemd/system/user.service
@@ -47,14 +45,10 @@
     ansible.builtin.service:
 
   - name: daemon_reload user service
-    tags:
-    - import
     ansible.builtin.systemd:
-      daemon_reload: true
+    daemon_reload: true
 
   - name: enable and start user service
-    tags:
-    - import
     ansible.builtin.service:
       name: user
       state: started
